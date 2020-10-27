@@ -1,4 +1,4 @@
-const CracoLessPlugin = require('craco-less');
+const CracoLessPlugin = require('craco-less')
 // 配置全局路径通配符 @
 const path = require('path')
 
@@ -21,6 +21,7 @@ module.exports = {
   webpack: {
     alias: {
       '@': resolve('src'),
+      components: resolve('src/components'),
     },
   },
-};
+}
