@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react'
+import './App.less'
+import { HashRouter as Router, Route } from 'react-router-dom'
+import routeList from './route/route.js'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Suspense fallback={<div>路由加载中，抱抱你，等一下下哦~</div>}>
+        {routeList.map((item: any) => {
+          if (item.exact) {
+            return <Route path={item.path} exact component={item.component} />
+          } else {
+            return <Route path={item.path} component={item.component} />
+          }
+        })}
+      </Suspense>
+    </Router>
+  )
 }
 
-export default App;
+export default App
