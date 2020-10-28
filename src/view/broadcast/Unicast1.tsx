@@ -1,11 +1,11 @@
 import * as React from 'react'
 import {
-  PriceServiceInstance,
+  PriceService
 } from '../../service/broadcast/PriceService'
 import { Input, Button } from 'antd'
 import { observer } from 'mobx-react'
 
-const priceService = PriceServiceInstance.priceServiceInstance
+const priceService = new PriceService()
 export interface IBroadcastProps {}
 
 class Unicast1 extends React.Component<IBroadcastProps> {

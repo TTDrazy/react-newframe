@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { PriceService } from '../../service/broadcast/PriceService'
+import { PriceServiceInstance, } from '../../service/broadcast/PriceService'
 import { Input, Button } from 'antd'
 import { observer } from 'mobx-react'
 
-const priceService = new PriceService()
+const priceService = PriceServiceInstance.priceServiceInstance
 export interface IBroadcastProps {}
 
-class Broadcast2 extends React.Component<IBroadcastProps> {
+class Unicast2 extends React.Component<IBroadcastProps> {
   state = {
     number: 0,
   }
@@ -20,7 +20,7 @@ class Broadcast2 extends React.Component<IBroadcastProps> {
   }
   public render() {
     return (
-      <div>
+      <div style={{ paddingRight: '30px' }}>
         <ul>
           {priceService.priceList.map((item) => (
             <li>{item.price}</li>
@@ -42,4 +42,4 @@ class Broadcast2 extends React.Component<IBroadcastProps> {
     )
   }
 }
-export default observer(Broadcast2)
+export default observer(Unicast2)
