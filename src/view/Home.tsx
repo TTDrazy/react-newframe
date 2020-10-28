@@ -1,14 +1,8 @@
-import * as React from 'react';
-import {Button} from 'antd'
-import { observer } from "mobx-react"
-import PriceService from "../service/PriceService"
+import * as React from 'react'
+import Main from '../component/layout/Main'
 
 export default class Home extends React.Component {
-  constructor(priceService){
-    priceService = new PriceService()
-  }
   public render() {
-    const priceList = observer()
     return (
       <div>
         <Main>

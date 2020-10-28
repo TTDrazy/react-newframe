@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import './App.less'
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router} from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import routeList from './route/route.js'
 
