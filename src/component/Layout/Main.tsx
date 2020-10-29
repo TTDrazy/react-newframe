@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Menu, Button } from 'antd'
 import {
-  AppstoreOutlined,
+  ScheduleOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   ProfileOutlined,
@@ -37,7 +37,7 @@ class Main extends React.Component<MainProps> {
             <div>
               <Menu
                 defaultSelectedKeys={['introduction']}
-                defaultOpenKeys={['sub1']}
+                defaultOpenKeys={['sub1', 'sub2']}
                 mode="inline"
                 theme="dark"
                 inlineCollapsed={this.state.collapsed}
@@ -50,21 +50,36 @@ class Main extends React.Component<MainProps> {
                   简介
                 </Menu.Item>
                 <SubMenu key="sub1" icon={<MailOutlined />} title="单播与广播">
-                  <Menu.Item key="5" onClick={() => this.toRoute('/broadcast')}>
-                    增加数字
+                  <Menu.Item
+                    key="2"
+                    onClick={() => this.toRoute('/broadcast/introduction')}
+                  >
+                    介绍
+                  </Menu.Item>
+                  <Menu.Item
+                    key="3"
+                    onClick={() => this.toRoute('/broadcast/demo')}
+                  >
+                    栗子
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
-                  icon={<AppstoreOutlined />}
-                  title="Navigation Two"
+                  icon={<ScheduleOutlined />}
+                  title="数据校验"
                 >
-                  <Menu.Item key="9">Option 9</Menu.Item>
-                  <Menu.Item key="10">Option 10</Menu.Item>
-                  <SubMenu key="sub3" title="Submenu">
-                    <Menu.Item key="11">Option 11</Menu.Item>
-                    <Menu.Item key="12">Option 12</Menu.Item>
-                  </SubMenu>
+                  <Menu.Item
+                    key="4"
+                    onClick={() => this.toRoute('/validator/introduction')}
+                  >
+                    介绍
+                  </Menu.Item>
+                  <Menu.Item
+                    key="5"
+                    onClick={() => this.toRoute('/validator/demo')}
+                  >
+                    栗子
+                  </Menu.Item>
                 </SubMenu>
               </Menu>
             </div>
