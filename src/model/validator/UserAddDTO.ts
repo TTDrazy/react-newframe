@@ -1,16 +1,11 @@
-import { IUser } from './IUser'
 import { IsNotEmpty, IsEmail, ValidationArguments } from 'class-validator'
 import AbsBaseEntity from '../AbsBaseEntity'
 
-export class UserVO extends AbsBaseEntity implements IUser {
-  constructor(id: number, email: string) {
+export class UserAddDTO extends AbsBaseEntity {
+  constructor(email: string) {
     super()
-    this.id = id
     this.email = email
   }
-  @IsNotEmpty()
-  id: number
-
   @IsNotEmpty({
     message: (validationArguments: ValidationArguments) =>
       `${validationArguments.property}不可以为空`,
