@@ -13,6 +13,12 @@ const ValidatorIntroduction = React.lazy(() =>
   import('@/view/validator/Introduction')
 )
 
+const MindcoreIndex = React.lazy(() => import('@/view/MindcoreIndex'))
+const MindcoreDemo = React.lazy(() => import('@/view/mindcore/Demo'))
+const MindcoreIntroduction = React.lazy(() =>
+  import('@/view/mindcore/Introduction')
+)
+
 const routeList = [
   {
     path: '/',
@@ -46,7 +52,21 @@ const routeList = [
         component: ValidatorIntroduction,
       },
     ],
-  }
+  },
+  {
+    path: '/mindcore',
+    component: MindcoreIndex,
+    routes: [
+      {
+        path: '/mindcore/demo',
+        component: MindcoreDemo,
+      },
+      {
+        path: '/mindcore/introduction',
+        component: MindcoreIntroduction,
+      },
+    ],
+  },
 ]
 
 export default routeList

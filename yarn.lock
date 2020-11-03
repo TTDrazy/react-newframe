@@ -6473,6 +6473,18 @@ internal-slot@^1.0.2:
     has "^1.0.3"
     side-channel "^1.0.2"
 
+inversify-props@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/inversify-props/-/inversify-props-2.2.6.tgz#4c4981487630b3039d6805251c8d1a347b48828a"
+  integrity sha512-ImLafUgM1Me4Xa7hcdo9DRt0Ca139JUa9byX9vzb4ihXkJtzWoxSqSw6hpBL45w4wqtFD3IPC/ldC1HqdaLQUA==
+  dependencies:
+    inversify "^5.0.1"
+
+inversify@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/inversify/-/inversify-5.0.1.tgz#500d709b1434896ce5a0d58915c4a4210e34fb6e"
+  integrity sha512-Ieh06s48WnEYGcqHepdsJUIJUXpwH5o5vodAX+DK2JA/gjy4EbEcQZxw+uFfzysmKjiLXGYwNG3qDZsKVMcINQ==
+
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
