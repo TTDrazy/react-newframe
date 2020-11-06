@@ -1,12 +1,11 @@
 import * as React from 'react'
-import Validator from '../../component/validator/Validator'
-
+import MindCore from '../../component/mindcore/MindCore'
 
 export default class Demo extends React.Component {
   public render() {
     return (
       <div>
-        <Validator></Validator>
+        <MindCore></MindCore>
       </div>
     )
   }

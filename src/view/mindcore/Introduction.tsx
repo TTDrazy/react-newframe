@@ -6,7 +6,7 @@ export default class Introduction extends React.Component<IIntroductionProps> {
   public render() {
     return (
       <div>
-        <div>利用 class-validator 和设计模式中的装饰器模式，为所有的字段加入校验</div>
+        <div>简单练习依赖注入、控制正转、控制反转、ioc 容器</div>
       </div>
     )
   }

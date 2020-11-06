@@ -1,14 +1,18 @@
-import * as React from 'react';
+import React from 'react'
+import { renderRoutes } from 'react-router-config'
+import { HashRouter as Router } from 'react-router-dom'
+import Main from '../component/layout/Main'
 
-export interface IMindcoreIndexProps {
+const MindcoreIndex = (props: any) => {
+  const { route } = props
+  return (
+    <Router>
+      <Main>
+        {/* 渲染子路由 */}
+        {renderRoutes(route.routes)}
+      </Main>
+    </Router>
+  )
 }
 
-export default class MindcoreIndex extends React.Component<IMindcoreIndexProps> {
-  public render() {
-    return (
-      <div>
-        
-      </div>
-    );
-  }
-}
+export default React.memo(MindcoreIndex)

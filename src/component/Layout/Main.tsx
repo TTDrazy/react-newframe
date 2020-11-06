@@ -37,7 +37,7 @@ class Main extends React.Component<MainProps> {
             <div>
               <Menu
                 defaultSelectedKeys={['introduction']}
-                defaultOpenKeys={['sub1', 'sub2']}
+                defaultOpenKeys={['sub1', 'sub2', 'sub3']}
                 mode="inline"
                 theme="dark"
                 inlineCollapsed={this.state.collapsed}
@@ -77,6 +77,24 @@ class Main extends React.Component<MainProps> {
                   <Menu.Item
                     key="5"
                     onClick={() => this.toRoute('/validator/demo')}
+                  >
+                    栗子
+                  </Menu.Item>
+                </SubMenu>
+                <SubMenu
+                  key="sub3"
+                  icon={<ScheduleOutlined />}
+                  title="基础核心概念"
+                >
+                  <Menu.Item
+                    key="6"
+                    onClick={() => this.toRoute('/mindcore/introduction')}
+                  >
+                    介绍
+                  </Menu.Item>
+                  <Menu.Item
+                    key="7"
+                    onClick={() => this.toRoute('/mindcore/demo')}
                   >
                     栗子
                   </Menu.Item>
