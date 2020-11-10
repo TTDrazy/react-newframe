@@ -115,6 +115,14 @@ export default class MindCore extends React.Component {
         <div>
           现在市面上 CPU 有 Inter 与 AMD 两家厂商的，内存有 海盗船 与 金士顿 的
         </div>
+        <div>现在可以通过 IOC 容器将其任意的组装起来</div>
+        <div>
+          Ioc
+          是把对象的控制权较给框架或容器，容器中存储了众多我们需要的对象，然后我们就无需再手动的在代码中创建对象
+        </div>
+        <div>
+          需要什么对象就直接告诉容器我们需要什么对象，容器会把对象根据一定的方式注入到我们的代码中。注入的过程被称为依赖注入(DI)
+        </div>
       </>
     )
   }
