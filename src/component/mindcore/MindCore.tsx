@@ -3,47 +3,44 @@ import 'reflect-metadata'
 import { container, inject } from 'inversify-props'
 
 interface ICPU {
-  cpu: String
+  // 接口里最好只有方法的定义，不要乱写
   processInstruction(): void
 }
 interface IMemory {
-  memory: String
   storeData(): void
 }
 
-class ABSCPU implements ICPU {
+abstract class ABSCPU implements ICPU {
+  // 抽象类里最后只有方法的定义，在继承类中多态实现具体方法
   constructor(cpu: String) {
     this.cpu = cpu
   }
   cpu: String
-  processInstruction(): void {
-    console.log(`我是${this.cpu},我可以处理指令哦~`)
-  }
+
+  abstract processInstruction(): void
 }
-class ABSMemory implements IMemory {
+abstract class ABSMemory implements IMemory {
   constructor(memory: String) {
     this.memory = memory
   }
   memory: String
-  storeData(): void {
-    console.log(`我是${this.memory},我可以存放数据哦~`)
-  }
+  abstract storeData(): void
 }
 
 class Computer {
-  constructor(cpu: ICPU, memory: IMemory) {
+  constructor(cpu: ABSCPU, memory: ABSMemory) {
     this.cpu = cpu
     this.memory = memory
   }
   // 这台电脑应该具有 cpu 与 内存 的固定插槽
-  cpu: ICPU
-  memory: IMemory
+  cpu: ABSCPU
+  memory: ABSMemory
   run() {
-    this.cpu.processInstruction()
-    this.memory.storeData()
     console.log(
       `我的 CPU 是 ${this.cpu.cpu} 的，我的内存是 ${this.memory.memory} 的`
     )
+    this.cpu.processInstruction()
+    this.memory.storeData()
   }
 }
 
@@ -51,11 +48,17 @@ class InterCPU extends ABSCPU {
   constructor() {
     super('Inter')
   }
+  processInstruction(): void {
+    console.log('我是 Inter 的处理器，我的性能最棒啦~')
+  }
 }
 
 class AMDCPU extends ABSCPU {
   constructor() {
     super('AMD')
+  }
+  processInstruction(): void {
+    console.log('我是 AMD 的处理器，我的价格最实惠啦~')
   }
 }
 
@@ -63,35 +66,29 @@ class HDCMemory extends ABSMemory {
   constructor() {
     super('HDC')
   }
+  storeData(): void {
+    console.log('我是 海盗船 的处理器，我的性能最棒啦~')
+  }
 }
 
 class JSDMemory extends ABSMemory {
   constructor() {
     super('JSD')
   }
-}
-
-class IOCComputer {
-  // 这台电脑应该具有 cpu 与 内存 的固定插槽
-  cpu: ICPU
-  memory: IMemory
-
-  // 注入 IOC 容器
-  constructor(@inject() cpu: ICPU, @inject() memory: IMemory) {
-    this.cpu = cpu
-    this.memory = memory
-  }
-
-  run() {
-    this.cpu.processInstruction()
-    this.memory.storeData()
-    console.log(
-      `我的 CPU 是 ${this.cpu.cpu} 的，我的内存是 ${this.memory.memory} 的`
-    )
+  storeData(): void {
+    console.log('我是 金士顿 的处理器，我的性价比最高啦~')
   }
 }
+
+//注入到容器中
+container.addSingleton<ICPU>(ABSCPU)
+container.addSingleton<IMemory>(ABSMemory)
 
 export default class MindCore extends React.Component {
+  // 在类中去引用
+  @inject() cpu: ABSCPU = new AMDCPU()
+  @inject() memory: ABSMemory = new JSDMemory()
+
   public render() {
     // 将创建新的内存条/内存放在组装电脑时再来控制初始化，将原本集成在电脑初始化时的操作外放，这就叫做依赖注入(DI)、控制反转
     // 如果将集成在电脑初始化的操作内置，则叫做控制正转
@@ -101,13 +98,13 @@ export default class MindCore extends React.Component {
     // 需要什么对象就直接告诉容器我们需要什么对象，容器会把对象根据一定的方式注入到我们的代码中。注入的过程被称为 DI。
     const computer1 = new Computer(new InterCPU(), new HDCMemory())
     computer1.run()
+    // 原始方式
     // const computer2 = new Computer(new AMDCPU(), new JSDMemory())
     // computer2.run()
-    // IOC 所需的依赖
-    container.addSingleton<ICPU>(new AMDCPU())
-    container.addSingleton<IMemory>(new JSDMemory())
-    const computer2 = new IOCComputer(new AMDCPU(), new JSDMemory())
-    computer2.run()
+    console.log('======================')
+    // IOC 的方式
+    const computer = new Computer(this.cpu, this.memory)
+    computer.run()
     return (
       <>
         <div>组装一个电脑的小案例</div>
