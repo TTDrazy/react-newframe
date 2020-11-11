@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsEmail, ValidationArguments } from 'class-validator'
-import AbsBaseEntity from '../AbsBaseEntity'
+import BaseEntity from '../BaseEntity'
 
-export class UserAddDTO extends AbsBaseEntity {
+export class UserAddDTO extends BaseEntity {
   constructor(email: string) {
     super()
     this.email = email

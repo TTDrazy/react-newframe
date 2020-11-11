@@ -3,6 +3,7 @@ import { Input, Button, message } from 'antd'
 import { ValidatorService } from '../../service/validator/ValidatorService'
 import { Table, Space } from 'antd'
 import { UserVO } from '../../model/validator/UserVO'
+import { UserControllerInstance } from './ValidatorController'
 
 export interface IValidatorProps {}
 
@@ -18,6 +19,11 @@ const columns = [
     key: 'email',
   },
   {
+    title: 'phoneNumber',
+    dataIndex: 'phone',
+    key: 'phone',
+  },
+  {
     title: 'Action',
     key: 'action',
     render: (text: any, record: any) => (
@@ -29,19 +35,18 @@ const columns = [
   },
 ]
 export default class Validator extends React.Component<IValidatorProps> {
-  validatorService = new ValidatorService()
+  userControllerInstance = UserControllerInstance.userControllerInstance
+
   state = {
-    userData: [],
     email: '',
   }
 
   componentDidMount() {
-    this.getAllList()
+    
   }
   async getAllList() {
-    this.setState({
-      userData: await this.validatorService.getList(),
-    })
+    let userList = await this.userControllerInstance.getUserList()
+    return userList
   }
   changeInput(e: any) {
     this.setState({
@@ -49,22 +54,23 @@ export default class Validator extends React.Component<IValidatorProps> {
     })
   }
   async addUser() {
-    let data = await this.validatorService.addUser(this.state.email)
-    if (!!data) {
-      message.success('您已添加成功！')
-      this.getAllList()
-    } else {
-      message.warning('您未能添加成功！')
-    }
-    this.setState({
-      email: '',
-    })
+    // let data = await this.validatorService.addUser(this.state.email)
+    // if (!!data) {
+    //   message.success('您已添加成功！')
+    //   this.getAllList()
+    // } else {
+    //   message.warning('您未能添加成功！')
+    // }
+    // this.setState({
+    //   email: '',
+    // })
   }
   public render() {
-    const { userData, email } = this.state
+    getAllList()
+     const { email } = this.state
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Table<UserVO> columns={columns} dataSource={userData} />
+        <Table<UserVO> columns={columns} dataSource={userList} />
         <div style={{ paddingLeft: '50px', display: 'flex' }}>
           <Input value={email} onChange={(e) => this.changeInput(e)}></Input>
           <Button type="primary" onClick={() => this.addUser()}>

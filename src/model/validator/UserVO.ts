@@ -1,26 +1,11 @@
-import { IUser } from './IUser'
-import { IsNotEmpty, IsEmail, ValidationArguments } from 'class-validator'
-import AbsBaseEntity from '../AbsBaseEntity'
-
-export class UserVO extends AbsBaseEntity implements IUser {
-  constructor(id: number, email: string) {
-    super()
+export class UserVO {
+  constructor({ id, email, phone }: UserVO = { id: 1, email: '', phone: '' }) {
     this.id = id
     this.email = email
+    this.phone = phone
   }
-  @IsNotEmpty()
-  id: number
 
-  @IsNotEmpty({
-    message: (validationArguments: ValidationArguments) =>
-      `${validationArguments.property}不可以为空`,
-  })
-  @IsEmail(
-    {},
-    {
-      message: (validationArguments: ValidationArguments) =>
-        `${validationArguments.property}不是一条有效的邮箱类型`,
-    }
-  )
+  id: number
   email: string
+  phone: string
 }

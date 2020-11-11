@@ -1,7 +1,7 @@
 import { IBaseEntity } from './IBaseEntity'
 import { validateOrReject } from 'class-validator'
 
-export default class AbsBaseEntity implements IBaseEntity {
+export default class BaseEntity implements IBaseEntity {
   async validator() {
     try {
       // this 指向每个继承此抽象接口的类
