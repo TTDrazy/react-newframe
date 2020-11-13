@@ -1,7 +1,9 @@
 import { UserVO } from './../../model/validator/UserVO'
 import { UserAPI } from './../../api/validator/UserAPI'
 import { UserAddDTO } from '../../model/validator/UserAddDTO'
-import UserValidatorModel from '../../model/validator/UserValidatorModel'
+// import UserValidatorModel from '../../model/validator/UserValidatorModel'
+import UserList_ViewModel from '../../model/validator/UserList_ViewModel'
+// import UserValidatorModel from '../../model/validator/UserValidatorModel'
 
 export class ValidatorService {
   userApi = new UserAPI()
@@ -13,16 +15,14 @@ export class ValidatorService {
   async getList() {
     let list = await this.userApi.getAll()
     let result: UserVO[] = []
-    // map 中使用 异步函数
-    await Promise.all(
-      list.map(async (item: any) => {
-        // 效验后台数据是否符合 UserVO 的展示标准，符合就推进展示数据中，不符合则将捕获其错误并打印出来
-        if (await new UserValidatorModel(item).validator()) {
-          result.push(new UserVO(item))
-        }
-      })
+
+    list.map((item: any) =>
+      // VO 不做效验，只有传数据库的时候才需要做 DTO 的效验
+      result.push(new UserVO(item))
     )
-    return result
+
+    const { userList } = new UserList_ViewModel(result)
+    return userList
   }
 
   /**
@@ -34,5 +34,5 @@ export class ValidatorService {
       let data = await this.userApi.addArticle(new UserAddDTO(email))
       return data
     }
-  }  
+  }
 }

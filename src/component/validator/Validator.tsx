@@ -3,9 +3,9 @@ import { Input, Button, message } from 'antd'
 import { ValidatorService } from '../../service/validator/ValidatorService'
 import { Table, Space } from 'antd'
 import { UserVO } from '../../model/validator/UserVO'
-import { UserControllerInstance } from './ValidatorController'
-
-export interface IValidatorProps {}
+import ValidatorController, {
+  UserControllerInstance,
+} from './ValidatorController'
 
 const columns = [
   {
@@ -34,20 +34,14 @@ const columns = [
     ),
   },
 ]
-export default class Validator extends React.Component<IValidatorProps> {
+export default class Validator extends React.Component {
   userControllerInstance = UserControllerInstance.userControllerInstance
 
   state = {
     email: '',
   }
 
-  componentDidMount() {
-    
-  }
-  async getAllList() {
-    let userList = await this.userControllerInstance.getUserList()
-    return userList
-  }
+  componentDidMount() {}
   changeInput(e: any) {
     this.setState({
       email: e.target.value,
@@ -66,8 +60,9 @@ export default class Validator extends React.Component<IValidatorProps> {
     // })
   }
   public render() {
-    getAllList()
-     const { email } = this.state
+    let validatorController: ValidatorController = new ValidatorController()
+    const userList = validatorController.getUserList()
+    const { email } = this.state
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Table<UserVO> columns={columns} dataSource={userList} />
