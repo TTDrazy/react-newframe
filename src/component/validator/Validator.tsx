@@ -3,9 +3,8 @@ import { Input, Button, message } from 'antd'
 import { ValidatorService } from '../../service/validator/ValidatorService'
 import { Table, Space } from 'antd'
 import { UserVO } from '../../model/validator/UserVO'
-import ValidatorController, {
-  UserControllerInstance,
-} from './ValidatorController'
+import UserController from './UserController'
+import { observer } from 'mobx-react'
 
 const columns = [
   {
@@ -34,14 +33,15 @@ const columns = [
     ),
   },
 ]
+
+@observer
 export default class Validator extends React.Component {
-  userControllerInstance = UserControllerInstance.userControllerInstance
+  user_Controller = new UserController()
 
   state = {
     email: '',
   }
 
-  componentDidMount() {}
   changeInput(e: any) {
     this.setState({
       email: e.target.value,
@@ -60,12 +60,14 @@ export default class Validator extends React.Component {
     // })
   }
   public render() {
-    let validatorController: ValidatorController = new ValidatorController()
-    const userList = validatorController.getUserList()
     const { email } = this.state
+    console.log(this.user_Controller.userList)
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Table<UserVO> columns={columns} dataSource={userList} />
+        <Table<UserVO>
+          columns={columns}
+          dataSource={this.user_Controller.userList}
+        />
         <div style={{ paddingLeft: '50px', display: 'flex' }}>
           <Input value={email} onChange={(e) => this.changeInput(e)}></Input>
           <Button type="primary" onClick={() => this.addUser()}>
