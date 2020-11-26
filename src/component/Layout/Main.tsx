@@ -6,6 +6,8 @@ import {
   MenuFoldOutlined,
   ProfileOutlined,
   MailOutlined,
+  FolderViewOutlined,
+  BulbOutlined,
 } from '@ant-design/icons'
 import style from './Main.module.scss'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
@@ -37,7 +39,7 @@ class Main extends React.Component<MainProps> {
             <div>
               <Menu
                 defaultSelectedKeys={['introduction']}
-                defaultOpenKeys={['sub1', 'sub2', 'sub3']}
+                defaultOpenKeys={['sub1']}
                 mode="inline"
                 theme="dark"
                 inlineCollapsed={this.state.collapsed}
@@ -50,52 +52,34 @@ class Main extends React.Component<MainProps> {
                   简介
                 </Menu.Item>
                 <SubMenu key="sub1" icon={<MailOutlined />} title="单播与广播">
-                  <Menu.Item
-                    key="2"
-                    onClick={() => this.toRoute('/broadcast/introduction')}
-                  >
+                  <Menu.Item key="2" onClick={() => this.toRoute('/broadcast/introduction')}>
                     介绍
                   </Menu.Item>
-                  <Menu.Item
-                    key="3"
-                    onClick={() => this.toRoute('/broadcast/demo')}
-                  >
+                  <Menu.Item key="3" onClick={() => this.toRoute('/broadcast/demo')}>
                     栗子
                   </Menu.Item>
                 </SubMenu>
-                <SubMenu
-                  key="sub2"
-                  icon={<ScheduleOutlined />}
-                  title="数据校验"
-                >
-                  <Menu.Item
-                    key="4"
-                    onClick={() => this.toRoute('/validator/introduction')}
-                  >
+                <SubMenu key="sub2" icon={<ScheduleOutlined />} title="数据校验">
+                  <Menu.Item key="4" onClick={() => this.toRoute('/validator/introduction')}>
                     介绍
                   </Menu.Item>
-                  <Menu.Item
-                    key="5"
-                    onClick={() => this.toRoute('/validator/demo')}
-                  >
+                  <Menu.Item key="5" onClick={() => this.toRoute('/validator/demo')}>
                     栗子
                   </Menu.Item>
                 </SubMenu>
-                <SubMenu
-                  key="sub3"
-                  icon={<ScheduleOutlined />}
-                  title="基础核心概念"
-                >
-                  <Menu.Item
-                    key="6"
-                    onClick={() => this.toRoute('/mindcore/introduction')}
-                  >
+                <SubMenu key="sub3" icon={<BulbOutlined />} title="基础核心概念">
+                  <Menu.Item key="6" onClick={() => this.toRoute('/mindcore/introduction')}>
                     介绍
                   </Menu.Item>
-                  <Menu.Item
-                    key="7"
-                    onClick={() => this.toRoute('/mindcore/demo')}
-                  >
+                  <Menu.Item key="7" onClick={() => this.toRoute('/mindcore/demo')}>
+                    栗子
+                  </Menu.Item>
+                </SubMenu>
+                <SubMenu key="sub4" icon={<FolderViewOutlined />} title="泛型">
+                  <Menu.Item key="8" onClick={() => this.toRoute('/genericity/introduction')}>
+                    介绍
+                  </Menu.Item>
+                  <Menu.Item key="9" onClick={() => this.toRoute('/genericity/demo')}>
                     栗子
                   </Menu.Item>
                 </SubMenu>
@@ -106,9 +90,7 @@ class Main extends React.Component<MainProps> {
         <div className={style.rightBox}>
           <div className={style.header}>
             <Button type="primary" onClick={this.toggleCollapsed}>
-              {React.createElement(
-                this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined
-              )}
+              {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
             </Button>
             <div className={style.title}>react-newframe</div>
           </div>
