@@ -1,9 +1,9 @@
 # 更新日志
 
-### 2020/12/16 + 2020/12/17
+### 2020/12/16 + 2020/12/17 + 2020/12/18
 
 1. 将 ts 文档的 handbook 部分再过一遍
-    - Basic Types - 基本类型
+    - Basic Types - 基本类型 √
     - interfaces - 接口
     - functions - 函数、方法
     - literal types - 文字类型

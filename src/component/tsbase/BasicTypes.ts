@@ -1,6 +1,9 @@
-import IBase from './IBase';
-// 基础类型
-export default class BasicTypes implements IBase{
+import IBase from "./IBase";
+
+/**
+ * 基础类型
+ */
+export default class BasicTypes implements IBase {
     // boolean 类型
     isFlag: boolean = false;
 
@@ -122,9 +125,64 @@ export default class BasicTypes implements IBase{
     }
 
     nullAndUndefinedTest() {
-      // null 与 undefined 类型
-      // 1. 默认情况下，null 和 undefined 是所有其他类型的子类型，这就意味着可以像 number 一样，分配 null 和 undefined
+        // null 与 undefined 类型
+        // 1. 默认情况下，null 和 undefined 是他们各自类型的值，这就非常像 void ，它们在它们各自中并不是非常实用
+        let u: undefined = undefined;
+        let n: null = null;
+        console.log(u, n);
+        // 2. 使用 --strictNullChecks 标志时，null和undefined只能分配给 unknown，any 以及它们各自的类型（一个例外undefined是也可以分配给void）。
+        // 这有助于避免许多常见错误。
+        // 如果要传递astring或nullor undefined，则可以使用并集类型 string | null | undefined
+        // 鼓励 --strictNullChecks 在可能的情况下使用它，但是出于本手册的目的，我们假定已将其关闭
     }
+
+    neverTest() {
+        // never 类型
+        // 1. never 类型表示值不会发生的类型
+        // 例如， never 会始终抛出异常或永不返回的异常的函数表达式或箭头函数表达式的返回类型
+        // 2. never 类型可以是任意类型的子类型，而任意类型（除了自身的 never 类型）都不是 never 类型的子类型，甚至 any 类型也不是
+        function error(message: string): never {
+            throw new Error(message);
+        }
+
+        function fail(): never {
+            return error("something failed");
+        }
+
+        // 函数返回 never 必须没有一个能够有限返回的终点
+        const infinitLoop = (): never => {
+            while (true) {}
+        };
+    }
+
+    objectTest() {
+        // object 对象
+        const create = (o: object | null): void => {};
+        create({ props: 0 });
+        create(null);
+        // 1. object 是一种类型的，他表示一种非初始类型
+        // 例如，它不是 number,string,boolean,bigint,symbol,null,undefined
+        // create(42) 提示类型“42”的参数不能赋给类型“object | null”的参数。ts(2345)
+    }
+
+    typeAssertionsTest() {
+        // 1. 类型断言就像其他语言中的类型转换一样，但是他不执行特殊检查或重构，但是它不执行数据的特殊检查或重构
+        // 它对运行时没有影响，仅由编译器使用
+        // 类型断言有两种形式
+        let someValue: unknown = "this is a string";
+        // let strLength:number = someValue.length 提示对象的类型为 "unknown"。ts(2571)
+        // (1) as 语法
+        let strLength1: number = (someValue as string).length;
+        // (2) <> 语法
+        let strLength2: number = (<string>someValue).length;
+        console.log(strLength1, strLength2);
+        // 2. 这两种方式都可以类型断言，应该优先使用 as 语法。然而当在 jsx 中使用 ts 时，仅仅 as 语法是被允许使用的
+    }
+
+    // 关于 Number,String,Boolean,Symbol 和 Object
+    // 1. 类型只采用小写，并且上述的所有大写的类型不引用语言原语（为一些程序段,系统在执行该程序段时,不会响应一般低级的中断请求）
+    // 并且几乎永远不会用作类型
+    
 
     run() {
         this.numberTest();
@@ -135,5 +193,7 @@ export default class BasicTypes implements IBase{
         this.anyTest();
         this.voidTest();
         this.nullAndUndefinedTest();
+        this.neverTest();
+        this.typeAssertionsTest();
     }
 }
