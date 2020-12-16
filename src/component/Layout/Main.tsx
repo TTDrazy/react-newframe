@@ -83,6 +83,14 @@ class Main extends React.Component<MainProps> {
                     栗子
                   </Menu.Item>
                 </SubMenu>
+                <SubMenu key="sub5" icon={<FolderViewOutlined />} title="ts基础">
+                  <Menu.Item key="tsintro" onClick={() => this.toRoute('/tsbase/introduction')}>
+                    介绍
+                  </Menu.Item>
+                  <Menu.Item key="tsdemo" onClick={() => this.toRoute('/tsbase/demo')}>
+                    栗子
+                  </Menu.Item>
+                </SubMenu>
               </Menu>
             </div>
           </div>

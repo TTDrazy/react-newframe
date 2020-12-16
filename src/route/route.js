@@ -17,6 +17,10 @@ const GenericityIndex = React.lazy(() => import('@/view/GenericityIndex'))
 const GenericityDemo = React.lazy(() => import('@/view/genericity/Demo'))
 const GenericityIntroduction = React.lazy(() => import('@/view/genericity/Introduction'))
 
+const TSBaseIndex = React.lazy(() => import('@/view/TSBaseIndex'))
+const TSBaseDemo = React.lazy(() => import('@/view/tsbase/Demo'))
+const TSBaseIntroduction = React.lazy(() => import('@/view/tsbase/Introduction'))
+
 const routeList = [
   {
     path: '/',
@@ -79,6 +83,20 @@ const routeList = [
       },
     ],
   },
+  {
+    path: '/tsbase',
+    component: TSBaseIndex,
+    routes: [
+      {
+        path: '/tsbase/demo',
+        component: TSBaseDemo,
+      },
+      {
+        path: '/tsbase/introduction',
+        component: TSBaseIntroduction,
+      },
+    ],
+  }
 ]
 
 export default routeList
