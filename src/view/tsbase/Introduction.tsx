@@ -21,6 +21,7 @@ export default class Introduction extends React.Component<IIntroductionProps> {
                 <ul>
                     <li>Basic Types - 基本类型</li>
                     <li>interfaces - 接口</li>
+                    <li>decorators - 装饰器</li>
                     <li>functions - 函数、方法</li>
                     <li>literal types - 文字类型</li>
                     <li>unions and intersection types - 联合与相交类型</li>

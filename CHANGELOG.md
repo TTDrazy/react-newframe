@@ -1,9 +1,9 @@
 # 更新日志
 
-### 2020/12/18
+### 2020/12/31
 
 1. 继续过 ts 文档 handbook 部分
-    - interfaces - 接口
+    - decorators - 装饰器
 
 ---
 
